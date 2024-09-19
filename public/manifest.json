@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "permissions": ["tabs", "windows", "activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html"
+  }
+}
