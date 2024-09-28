@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "short_name": "React App",
   "name": "Create React App Sample",
-  "permissions": ["tabs", "windows", "activeTab", "sidePanel"],
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
-  "action" : {},
+  "action": {},
   "side_panel": {
     "default_path": "index.html"
   }

@@ -1,15 +1,11 @@
 let image_url = "";
 
-// 크롬 익스텐션 아이콘 클릭 시, 사이드바 설정
-chrome.action.onClicked.addListener(() => {
-  chrome.sidePanel.setOptions({
-    path: 'sidebar.html', // 사이드바에 띄울 HTML 파일 경로
-    enabled: true         // 사이드바를 열도록 설정
-  });
+// 크롬 익스텐션 아이콘 클릭 시, 사이드바가 열리도록 설정
+chrome.action.onClicked.addListener(async (tab) => {
+  await chrome.sidePanel.open({ windowId: tab.windowId });
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  // 이 부분 주목!!
   // -------------------------------------------------------------------
   //background.js에 App.jsx에서 보낸 요청이 도착: {message: "get_tabs"}
   if (request.message === "get_tabs") {
@@ -27,5 +23,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // 비동기 응답
   }
 });
-
-
