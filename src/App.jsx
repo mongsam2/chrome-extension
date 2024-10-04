@@ -8,17 +8,6 @@ function App() {
   const [tabs, setTabs] = useState([]);
   const [screenshot, setScreenshot] = useState(null);
 
-  const captureScreenshot = () => {
-    chrome.runtime.sendMessage(
-      { message: "capture_screenshot" },
-      (response) => {
-        if (response && response.screenshot) {
-          setScreenshot(response.screenshot);
-        }
-      }
-    );
-  };
-
   // 이 부분 주목!!
   // -------------------------------------------------------------------
   useEffect(() => {
@@ -30,7 +19,7 @@ function App() {
         setTabs(response.tabs);
       }
     });
-  }, []);
+  }, [tabs]);
   // -------------------------------------------------------------------
 
   return (
@@ -68,14 +57,6 @@ function App() {
           </li>
         ))}
       </ul>
-      <h1>현재 탭 스크린샷</h1>
-      <button onClick={captureScreenshot}>스크린샷 찍기</button>
-      {screenshot && (
-        <div>
-          <h2>스크린샷 결과:</h2>
-          <img src={screenshot} alt="탭 스크린샷" style={{ width: "100%" }} />
-        </div>
-      )}
     </>
   );
 }

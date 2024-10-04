@@ -2,14 +2,8 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "short_name": "React App",
-  "name": "Create React App Sample",
-  "permissions": [
-    "activeTab",
-    "sidePanel",
-    "contextMenus",
-    "storage",
-    "unlimitedStorage"
-  ],
+  "name": "장기 프로젝트",
+  "permissions": ["activeTab", "sidePanel", "contextMenus"],
   "background": {
     "service_worker": "background.js"
   },

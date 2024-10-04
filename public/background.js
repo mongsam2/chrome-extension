@@ -1,5 +1,3 @@
-let image_url = "";
-
 chrome.runtime.onInstalled.addListener(() => {
   // 우클릭 시, 나오는 항목에 "Open Side Bar" 추가
   chrome.contextMenus.create({
@@ -32,11 +30,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // sendResponse가 비동기적으로 호출될 수 있음을 알림
   }
   // -------------------------------------------------------------------
-
-  if (request.message === "capture_screenshot") {
-    chrome.tabs.captureVisibleTab(null, { format: "png" }, (image) => {
-      sendResponse({ screenshot: image });
-    });
-    return true; // 비동기 응답
-  }
 });
