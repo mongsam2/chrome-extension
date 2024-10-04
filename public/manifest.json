@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "short_name": "React App",
   "name": "장기 프로젝트",
-  "permissions": ["activeTab", "sidePanel", "contextMenus"],
+  "permissions": ["activeTab", "sidePanel", "contextMenus", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
