@@ -18,9 +18,7 @@ function TabList() {
   // 버튼 클릭 시, 탭 요약 요청을 보내는 함수
   const handleButton = () => {
     chrome.runtime.sendMessage({ action: "scripting" }, (response) => {
-      setTitle(response.content.title);
-      setHeadings(response.content.headings);
-      setBodyText(response.content.bodyText);
+      setBodyText(response.content);
     });
   };
 

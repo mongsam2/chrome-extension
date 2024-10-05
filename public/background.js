@@ -21,16 +21,20 @@ chrome.tabs.onRemoved.addListener(() => {
 });
 
 function extractHtml() {
-  const bodyText = document.body ? document.body.innerText : "";
-  const title = document.title || "";
-  const headings = Array.from(document.querySelectorAll("h1, h2"))
-    .map((h) => h.innerText)
-    .join("\n");
-  return {
-    title,
-    headings,
-    bodyText,
-  };
+  const tagsToExtract = ["title", "h1", "h2", "h3", "p", "ul", "ol", "li"];
+  let extractedContent = "";
+  tagsToExtract.forEach((tag) => {
+    const elements = document.querySelectorAll(tag);
+    elements.forEach((element) => {
+      if (tag === "a") {
+        extractedContent += `Link: ${element.href} \n`;
+      } else {
+        extractedContent += `${tag.toUpperCase()}: ${element.innerText.trim()} \n`;
+      }
+    });
+  });
+
+  return extractedContent;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
