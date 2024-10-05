@@ -37,7 +37,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action == "scripting") {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const current_tab = tabs[0];
-      sendResponse({ tab: current_tab });
+      if (current_tab) {
+        chrome.scripting.executeScript(
+          {
+            target: { tabId: current_tab.id },
+            function: extractHtml,
+          },
+          (result) => {
+            if (result) {
+              sendResponse({ content: result[0].result });
+            }
+          }
+        );
+      }
     });
     return true;
   }
