@@ -2,12 +2,20 @@ import { useState, useEffect } from "react";
 
 function TabList() {
   const [tabs, setTabs] = useState([]);
+  const [content, setContent] = useState("");
 
   // 탭 목록을 업데이트하는 함수
   const updateTabs = () => {
     chrome.tabs.query({}, (result) => {
       console.log(result);
       setTabs(result);
+    });
+  };
+
+  // 버튼 클릭 시, 탭 요약 요청을 보내는 함수
+  const handleButton = () => {
+    chrome.runtime.sendMessage({ action: "scripting" }, (response) => {
+      setContent(response.tab.title);
     });
   };
 
@@ -32,6 +40,9 @@ function TabList() {
 
   return (
     <div>
+      <h1>페이지 요약하기</h1>
+      <p>{content}</p>
+      <button onClick={handleButton}>요약하기</button>
       <h1>Open Tabs</h1>
       <ul>
         {tabs.map((tab) => (

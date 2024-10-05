@@ -19,3 +19,26 @@ chrome.tabs.onCreated.addListener(() => {
 chrome.tabs.onRemoved.addListener(() => {
   chrome.runtime.sendMessage({ action: "update" });
 });
+
+function extractHtml() {
+  const bodyText = document.body ? document.body.innerText : "";
+  const title = document.title || "";
+  const headings = Array.from(document.querySelectorAll("h1, h2"))
+    .map((h) => h.innerText)
+    .join("\n");
+  return {
+    title,
+    headings,
+    bodyText,
+  };
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action == "scripting") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const current_tab = tabs[0];
+      sendResponse({ tab: current_tab });
+    });
+    return true;
+  }
+});
