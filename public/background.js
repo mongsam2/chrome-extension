@@ -73,9 +73,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     //
   } else if (request.action == "summarizing") {
     const content = request.content; // 추출한 코드가 들어있는 문자열입니다!
-    // TODO:
-    // 추출한 코드를 열어놨던 chat gpt 프롬프트 입력창에다가 자동으로 입력해줍니다
-    // 프롬프트 입력이 끝났으면 버튼을 자동으로 눌러 답변을 생성합니다.
-    // 답변이 생성되면 추출해서 저장합니다.
   }
 });
