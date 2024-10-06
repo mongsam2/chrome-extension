@@ -1,10 +1,7 @@
-import { head } from "framer-motion/client";
 import { useState, useEffect } from "react";
 
 function TabList() {
   const [tabs, setTabs] = useState([]);
-  const [title, setTitle] = useState("");
-  const [headings, setHeadings] = useState("");
   const [bodyText, setBodyText] = useState("");
 
   // 탭 목록을 업데이트하는 함수
@@ -19,6 +16,10 @@ function TabList() {
   const handleButton = () => {
     chrome.runtime.sendMessage({ action: "scripting" }, (response) => {
       setBodyText(response.content);
+      chrome.runtime.sendMessage({
+        action: "scripting",
+        content: response.content,
+      });
     });
   };
 
@@ -44,8 +45,6 @@ function TabList() {
   return (
     <div>
       <h1>페이지 요약하기</h1>
-      <h2>{title}</h2>
-      <h3>{headings}</h3>
       <p>{bodyText}</p>
       <button onClick={handleButton}>요약하기</button>
       <h1>Open Tabs</h1>
